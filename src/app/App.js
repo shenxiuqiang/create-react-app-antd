@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false,
+    };
+  }
+
   render() {
     return (
       <div className="App">
-      <Button type="primary">Button</Button>
+        <Button type="primary">Button</Button>
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
