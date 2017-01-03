@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { default as configureStore } from '../store/createStore';
-import Index from '../index/index';
+import Main from '../main/index';
 
 const store = configureStore();
 
 const App = () => <Provider store={store}>
-  <Index />
+  <Main />
 </Provider>;
 
 export default App;
