@@ -8,7 +8,6 @@ function reduceList(state = {}, action) {
   }
 }
 
-
 export default combineReducers({
   reduceList,
 });
