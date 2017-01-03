@@ -11,7 +11,6 @@ class App extends Component {
   }
 
   handleClick = (e) => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });
@@ -26,6 +25,9 @@ class App extends Component {
       >
         <Menu.Item key="mail">
           <Icon type="mail" />Navigation One
+        </Menu.Item>
+        <Menu.Item key="alipay">
+          <Icon type="step-backward" />alipay
         </Menu.Item>
       </Menu>
     );
