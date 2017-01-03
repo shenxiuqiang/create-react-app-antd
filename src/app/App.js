@@ -1,29 +1,12 @@
-import React, { Component } from 'react';
-import { Button } from 'antd';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { default as configureStore } from '../store/createStore';
+import Index from '../index/index';
 
-class App extends Component {
+const store = configureStore();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false,
-    };
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Button type="primary">Button</Button>
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => <Provider store={store}>
+  <Index />
+</Provider>;
 
 export default App;
