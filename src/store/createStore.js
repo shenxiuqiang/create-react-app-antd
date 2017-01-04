@@ -3,26 +3,13 @@ import thunk from 'redux-thunk';
 import { default as allReducers } from './reducers';
 
 export default function configureStore(initialState = {}) {
-  // 中间件
-  const middleware = [thunk];
-
-  // ======================================================
-  // Store Enhancers
-  // ======================================================
-  const enhancers = [];
-
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
-  const store = createStore(
-    allReducers,
-    initialState,
-    compose(
-      applyMiddleware(...middleware),
-      ...enhancers,
-    ),
-  );
-  store.asyncReducers = {};
+  const store = compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f,
+)(createStore)(allReducers, initialState);
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {

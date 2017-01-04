@@ -3,7 +3,7 @@ import { Tabs } from 'antd';
 
 const TabPane = Tabs.TabPane;
 
-class App extends Component {
+class MainTab extends Component {
 
   constructor(props) {
     super(props);
@@ -34,4 +34,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default MainTab;
