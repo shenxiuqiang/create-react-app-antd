@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
+import { menus } from './menus';
 
 class App extends Component {
 
@@ -23,12 +24,7 @@ class App extends Component {
         selectedKeys={[this.state.current]}
         mode="horizontal"
       >
-        <Menu.Item key="mail">
-          <Icon type="mail" />Navigation One
-        </Menu.Item>
-        <Menu.Item key="alipay">
-          <Icon type="step-backward" />alipay
-        </Menu.Item>
+        {menus.map(data => <Menu.Item key={data.key}>{data.title}</Menu.Item>)}
       </Menu>
     );
   }
