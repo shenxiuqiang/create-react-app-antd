@@ -2,29 +2,29 @@ export const menus = [
   {
     title: '店铺管理',
     key: 'storeList',
-    //component: require('../storeManage/ListContainer'),
+    component: require('../storeManage/Container').default,
   },
   {
     title: '订单管理',
     key: 'sellOrders',
-    //component: require('../orderSell/ListContainer'),
+    component: require('../orderManage/Container').default,
   },
   {
     title: '快递单模板',
     key: 'printExpressTemplate',
     on: true,
-    //component: require('../printExpressTemplate/ListContainer'),
+    component: require('../orderManage/Container').default,
   },
   {
     title: '其他打印模板',
     key: 'printTemplate',
     on: true,
-    //component: require('../printTemplate/ListContainer'),
+    component: require('../orderManage/Container').default,
   },
   {
     title: '物流管理',
     key: 'logisticsManage',
-    //component: require('../expressCompany/ListContainer'),
+    component: require('../orderManage/Container').default,
   },
 ];
 

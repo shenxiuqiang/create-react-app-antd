@@ -1,21 +1,22 @@
-import { dispatchCurrent } from './reducer';
+import { dispatchCurrentMenu, dispatchCurrentTab, dispatchCurrentRemove } from './reducer';
 
-function dispatchList(data) {
-  return {
-    type: 'LIST',
-    data,
-  };
-}
-
-
-export function fetchList() {
-  return (dispatch) => {
-    dispatch(dispatchList(1));
-  };
-}
 
 export function onMenuClick(data) {
   return (dispatch) => {
-    dispatch(dispatchCurrent(data));
+    dispatch(dispatchCurrentMenu(data));
+  };
+}
+
+export function onTabChange(data) {
+  return (dispatch) => {
+    dispatch(dispatchCurrentTab(data));
+  };
+}
+
+export function onTabEdit(targetKey, action) {
+  return (dispatch) => {
+    if (targetKey !== 'index' && action === 'remove') {
+      dispatch(dispatchCurrentRemove(targetKey));
+    }
   };
 }

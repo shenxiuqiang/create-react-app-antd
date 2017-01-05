@@ -2,27 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as action from './action';
-import { reduceData } from './reducer';
 import Menu from './Menu';
 import Tab from './Tab';
 import './index.css';
 
-const Main = props =>
+const Main = ({ data, onMenuClick, onTabChange, onTabEdit }) =>
   <div>
     <Menu
-      current={props.data.current}
-      onClick={props.onMenuClick}
+      current={data.currentMenu}
+      onClick={onMenuClick}
     />
-    <Tab />
+    <Tab
+      onChange={onTabChange}
+      activeKey={data.currentTab}
+      onEdit={onTabEdit}
+      panes={data.panes}
+    />
   </div>;
 
 Main.propTypes = {
   data: React.PropTypes.object,
   onMenuClick: React.PropTypes.func,
+  onTabChange: React.PropTypes.func,
+  onTabEdit: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
-  data: reduceData(state.mainReducer),
+  data: state.mainReducer,
 });
 
 function mapDispatchToProps(dispatch) {

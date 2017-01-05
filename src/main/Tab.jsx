@@ -1,37 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Tabs } from 'antd';
 
 const TabPane = Tabs.TabPane;
 
-class MainTab extends Component {
+const MainTab = ({
+onChange,
+activeKey,
+onEdit,
+panes }) =>
+  <Tabs
+    hideAdd
+    onChange={onChange}
+    activeKey={activeKey}
+    type={panes.length > 1 ? 'editable-card' : 'card'}
+    onEdit={onEdit}
+  >
+    {panes.map((pane) => {
+      const Comp = pane.component;
+      return <TabPane tab={pane.title} key={pane.key}><Comp /></TabPane>;
+    })}
+  </Tabs>;
 
-  constructor(props) {
-    super(props);
-    const panes = [
-      { title: 'Tab 1', content: 'Content of Tab Pane 1', key: '1' },
-      { title: 'Tab 2', content: 'Content of Tab Pane 2', key: '2' },
-    ];
-    this.state = {
-      activeKey: panes[0].key,
-      panes,
-    };
-    this.newTabIndex = 0;
-  }
-
-  render() {
-    return (
-      <Tabs
-        hideAdd
-        onChange={this.onChange}
-        activeKey={this.state.activeKey}
-        type="editable-card"
-        onEdit={this.onEdit}
-      >
-        {this.state.panes.map(pane =>
-          <TabPane tab={pane.title} key={pane.key}>{pane.content}</TabPane>)}
-      </Tabs>
-    );
-  }
-}
+MainTab.propTypes = {
+  onChange: React.PropTypes.func,
+  activeKey: React.PropTypes.string,
+  onEdit: React.PropTypes.func,
+  panes: React.PropTypes.array,
+};
 
 export default MainTab;
