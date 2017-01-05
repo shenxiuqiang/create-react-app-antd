@@ -5,9 +5,9 @@ const TabPane = Tabs.TabPane;
 
 const MainTab = ({
 onChange,
-activeKey,
+activeKey = 'index',
 onEdit,
-panes }) =>
+panes = [{ title: '首页', component: require('../index/index').default, key: 'index' }] }) =>
   <Tabs
     hideAdd
     onChange={onChange}

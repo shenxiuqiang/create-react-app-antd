@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import { menus } from './menus';
 
-const MainMenu = ({ onClick, current }) =>
+const MainMenu = ({ onClick, current = 'index' }) =>
   <Menu
     onClick={e => onClick(e.key)}
     selectedKeys={[current]}
