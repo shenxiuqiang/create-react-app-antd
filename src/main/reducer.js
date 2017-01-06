@@ -18,11 +18,11 @@ export const dispatchCurrentRemove = data => ({
 });
 
 
-export default function reduceList(state = {
+export default (state = {
   currentMenu: 'index',
   currentTab: 'index',
   panes: [{ title: '首页', component: require('../index/index').default, key: 'index' }],
-}, action) {
+}, action) => {
   switch (action.type) {
     case CURRENT_MENU: {
       if (state.panes.filter(data => data.key === action.data).length === 0) {
@@ -46,4 +46,4 @@ export default function reduceList(state = {
     default:
       return state;
   }
-}
+};
