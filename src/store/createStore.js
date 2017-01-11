@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { default as allReducers } from './reducers';
+import { default as allReducers } from './combineReducers';
 
 export default function configureStore(initialState = {}) {
   // ======================================================
