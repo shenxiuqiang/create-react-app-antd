@@ -1,4 +1,6 @@
-const PATH = 'STOREMANAGE/';
+import { createAction } from 'redux-actions';
+
+const PATH = 'STOREMANAGE_';
 export const LIST = `${PATH}LIST`;
 export const LIST_LOADING = `${PATH}LIST_LOADING`;
 export const EDIT = `${PATH}EDIT`;
@@ -8,16 +10,8 @@ export const HIDE = `${PATH}HIDE`;
 export const ROW_SELECT = `${PATH}ROW_SELECT`;
 export const EDIT_CHANGE = `${PATH}EDIT_CHANGE`;
 
-
-export const dispatchList = (data, keyword) => ({
-  ...data,
-  type: LIST,
-  keyword,
-});
-export const dispatchListLoading = data => ({
-  type: LIST_LOADING,
-  data,
-});
+export const actionList = createAction(LIST);
+export const actionListLoading = createAction(LIST_LOADING);
 
 const initialState = {
   listLoading: false,
@@ -32,15 +26,16 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case LIST:
       {
+        const { data, keyword } = action.payload;
         return { ...state,
-          data: action.data,
+          data: data.data,
           pagination: {
-            total: action.total,
-            pageSize: action.pageSize,
-            currentPage: action.currentPage,
-            keyword: action.keyword,
+            total: data.total,
+            pageSize: data.pageSize,
+            currentPage: data.currentPage,
+            keyword,
           },
-          listLoading: action.false,
+          listLoading: false,
           selectedRowKeys: [],
           selectedRows: [],
         };
@@ -48,7 +43,7 @@ export default (state = initialState, action) => {
     case LIST_LOADING:
       {
         return { ...state,
-          listLoading: action.data,
+          listLoading: action.payload,
         };
       }
     case ROW_SELECT:
@@ -61,7 +56,7 @@ export default (state = initialState, action) => {
     case DELETE_LOADING:
       {
         return { ...state,
-          delLoading: action.data,
+          delLoading: action.payload,
         };
       }
     case EDIT:

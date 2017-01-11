@@ -1,4 +1,4 @@
-import { dispatchList, dispatchListLoading } from './reducer';
+import { actionList, actionListLoading } from './reducer';
 import { listApi, editApi } from '../service/storeManageService';
 
 
@@ -11,13 +11,17 @@ export const fetchList = (pagination = {}) => (dispatch, getState) => {
   pagination.currentPage = pagination.currentPage || currentPage;
   pagination.pageSize = pagination.pageSize || pageSize;
   pagination.goodsBrandName = pagination.goodsBrandName || keyword;
-  dispatch(dispatchListLoading(true));
+  console.log(actionListLoading);
+  dispatch(actionListLoading(true));
   listApi(pagination)
       .then((response) => {
-        dispatch(dispatchList(response, pagination.goodsBrandName));
+        dispatch(actionList({
+          data: response,
+          keyword: pagination.goodsBrandName,
+        }));
       })
       .always(() => {
-        dispatch(dispatchListLoading(false));
+        dispatch(actionListLoading(false));
       });
 };
 

@@ -3,11 +3,19 @@ import thunk from 'redux-thunk';
 import { default as allReducers } from './combineReducers';
 
 export default function configureStore(initialState = {}) {
+  const middlewares = [thunk];
+
+  if (process.env.NODE_ENV === 'development') {
+    const createLogger = require('redux-logger');
+    const logger = createLogger();
+    middlewares.push(logger);
+  }
+
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
   const store = compose(
-  applyMiddleware(thunk),
+  applyMiddleware(...middlewares),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore)(allReducers, initialState);
 
