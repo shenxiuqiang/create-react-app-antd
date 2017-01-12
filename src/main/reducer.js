@@ -1,22 +1,14 @@
+import { createAction } from 'redux-actions';
+
 import { menus } from './menus';
 
 const CURRENT_MENU = 'CURRENT_MENU';
 const CURRENT_TAB = 'CURRENT_TAB';
 const TAB_REMOVE = 'TAB_REMOVE';
 
-export const dispatchCurrentMenu = data => ({
-  type: CURRENT_MENU,
-  data,
-});
-export const dispatchCurrentTab = data => ({
-  type: CURRENT_TAB,
-  data,
-});
-export const dispatchCurrentRemove = data => ({
-  type: TAB_REMOVE,
-  data,
-});
-
+export const dispatchCurrentMenu = createAction(CURRENT_MENU);
+export const dispatchCurrentTab = createAction(CURRENT_TAB);
+export const dispatchCurrentRemove = createAction(TAB_REMOVE);
 
 export default (state = {
   currentMenu: 'index',
@@ -25,22 +17,38 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case CURRENT_MENU: {
-      if (state.panes.filter(data => data.key === action.data).length === 0) {
-        state.panes = state.panes.concat(menus.filter(data => data.key === action.data));
+      const targetKey = action.payload;
+      let { panes } = state;
+      if (panes.filter(data => data.key === targetKey).length === 0) {
+        panes = panes.concat(menus.filter(data => data.key === targetKey));
       }
       return { ...state,
-        currentMenu: action.data,
-        currentTab: action.data,
+        currentMenu: targetKey,
+        currentTab: targetKey,
+        panes,
       };
     }
     case CURRENT_TAB: {
       return { ...state,
-        currentTab: action.data,
+        currentTab: action.payload,
       };
     }
     case TAB_REMOVE: {
-      state.panes = state.panes.filter(data => data.key !== action.data);
+      const targetKey = action.payload;
+      let { currentTab, panes } = state;
+      let lastIndex;
+      panes.forEach((pane, i) => {
+        if (pane.key === targetKey) {
+          lastIndex = i - 1;
+        }
+      });
+      panes = panes.filter(data => data.key !== targetKey);
+      if (lastIndex >= 0 && currentTab === targetKey) {
+        currentTab = panes[lastIndex].key;
+      }
       return { ...state,
+        panes,
+        currentTab,
       };
     }
     default:
