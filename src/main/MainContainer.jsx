@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as action from './action';
 import Menu from './Menu';
 import Tab from './Tab';
-import './index.css';
 
 const Main = ({ data, onMenuClick, onTabChange, onTabEdit }) =>
   <div>

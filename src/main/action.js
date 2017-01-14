@@ -1,4 +1,8 @@
-import { dispatchCurrentMenu, dispatchCurrentTab, dispatchCurrentRemove } from './reducer';
+import {
+  dispatchCurrentMenu,
+  dispatchCurrentTab,
+  dispatchCurrentRemove,
+} from './reducer';
 
 
 export function onMenuClick(data) {

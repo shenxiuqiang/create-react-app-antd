@@ -7,3 +7,11 @@ body {
 .ant-tabs-tabpane {
   padding: 0 20px;
 }
+
+.table-operation-bar {
+  margin-bottom: 16px;
+}
+
+.button-second {
+  margin-left: 8px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { menus } from './menus';
+import menus from './menus';
 
 const MainMenu = ({ onClick, current = 'index' }) =>
   <Menu
