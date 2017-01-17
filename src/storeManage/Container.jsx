@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as action from './action';
 import List from './List';
+import Edit from './Edit';
 
 const Main = ({ data: { listLoading, data }, fetchList }) =>
   <div>
@@ -11,6 +12,7 @@ const Main = ({ data: { listLoading, data }, fetchList }) =>
       data={data}
       fetchList={fetchList}
     />
+    <Edit />
   </div>;
 
 Main.propTypes = {
