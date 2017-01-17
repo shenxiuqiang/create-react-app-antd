@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import MainMenu from '../../src/main/Menu';
-import { menus } from '../../src/main/menus';
+import menus from '../../src/main/menus';
 
 describe('<MainMenu />', () => {
   const onButtonClick = sinon.spy();
