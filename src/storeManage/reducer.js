@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import { createAction } from 'redux-actions';
 
 const PATH = 'STOREMANAGE_';
@@ -12,8 +13,10 @@ export const EDIT_CHANGE = `${PATH}EDIT_CHANGE`;
 
 export const actionList = createAction(LIST);
 export const actionListLoading = createAction(LIST_LOADING);
+export const actionEdit = createAction(EDIT);
+export const actionHide = createAction(HIDE);
 
-const initialState = {
+const listInitialState = {
   listLoading: false,
   delLoading: false,
   pagination: {},
@@ -22,7 +25,7 @@ const initialState = {
   keyword: '',
 };
 
-export default (state = initialState, action) => {
+export function listReducer(state = listInitialState, action) {
   switch (action.type) {
     case LIST:
       {
@@ -59,12 +62,36 @@ export default (state = initialState, action) => {
           delLoading: action.payload,
         };
       }
-    case EDIT:
-      {
-        return { ...state,
-        };
-      }
     default:
       return state;
   }
+}
+
+const editInitialState = {
+  visible: false,
+  edit: {},
 };
+
+export function editReducer(state = editInitialState, action) {
+  switch (action.type) {
+    case EDIT:
+      {
+        return { ...state,
+          visible: true,
+          edit: action.payload,
+        };
+      }
+    case HIDE: {
+      return { ...state,
+        visible: false,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  listReducer,
+  editReducer,
+});

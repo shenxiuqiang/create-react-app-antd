@@ -5,29 +5,41 @@ import * as action from './action';
 import List from './List';
 import Edit from './Edit';
 
-const Main = ({ data: { listLoading, data }, fetchList }) =>
-  <div>
-    <List
-      listLoading={listLoading}
-      data={data}
-      fetchList={fetchList}
-    />
-    <Edit />
-  </div>;
+const Container = ({
+  fetchList,
+  fetchEdit,
+  hide,
+  listState: { listLoading, data },
+  editState: { visible, edit } }) =>
+    <div>
+      <List
+        listLoading={listLoading}
+        data={data}
+        fetchList={fetchList}
+        fetchEdit={fetchEdit}
+      />
+      <Edit
+        visible={visible}
+        edit={edit}
+        hide={hide}
+      />
+    </div>;
 
-Main.propTypes = {
-  data: React.PropTypes.object,
+Container.propTypes = {
+  listState: React.PropTypes.object,
+  editState: React.PropTypes.object,
   fetchList: React.PropTypes.func,
+  fetchEdit: React.PropTypes.func,
+  hide: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
-  data: state.storeManageReducer,
+  listState: state.storeManageReducer.listReducer,
+  editState: state.storeManageReducer.editReducer,
 });
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(action, dispatch);
-}
+const mapDispatchToProps = dispatch => bindActionCreators(action, dispatch);
 
 export default connect(mapStateToProps,
-  mapDispatchToProps)(Main);
+  mapDispatchToProps)(Container);
 

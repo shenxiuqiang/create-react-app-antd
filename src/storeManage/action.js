@@ -1,4 +1,4 @@
-import { actionList, actionListLoading } from './reducer';
+import { actionList, actionListLoading, actionEdit, actionHide } from './reducer';
 import { listApi, editApi } from '../service/storeManageService';
 
 
@@ -7,7 +7,7 @@ export const fetchList = (pagination = {}) => (dispatch, getState) => {
         currentPage,
         pageSize,
         keyword,
-    } = getState().storeManageReducer.pagination;
+    } = getState().storeManageReducer.listReducer.pagination;
   pagination.currentPage = pagination.currentPage || currentPage;
   pagination.pageSize = pagination.pageSize || pageSize;
   pagination.goodsBrandName = pagination.goodsBrandName || keyword;
@@ -19,7 +19,7 @@ export const fetchList = (pagination = {}) => (dispatch, getState) => {
             keyword: pagination.goodsBrandName,
           }));
         })
-        .always(() => {
+        .fail(() => {
           dispatch(actionListLoading(false));
         });
 };
@@ -28,16 +28,16 @@ export const fetchEdit = id => (dispatch) => {
   if (id !== -1) {
     editApi({ id })
             .then((response) => {
-              dispatch(dispatchEdit(response.data));
+              dispatch(actionEdit(response.data));
             })
             .fail(() => {
-              dispatch(dispatchEdit({}));
+              dispatch(actionEdit({}));
             });
   } else {
-    dispatch(dispatchEdit({}));
+    dispatch(actionEdit({}));
   }
 };
 
 export const hide = () => (dispatch) => {
-  dispatch(dispatchHide());
+  dispatch(actionHide());
 };

@@ -3,7 +3,7 @@ import { Button, Table, Icon, Row, Col } from 'antd';
 import moment from 'moment';
 import { getStoreType } from '../util/getStoreType.js';
 
-class TableEnterLeave extends React.Component {
+class List extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class TableEnterLeave extends React.Component {
         title: '店铺类型',
         dataIndex: 'storeType',
         key: 'storeType',
-        width: 100,
+        width: '7%',
         render(text, record) {
           return <span>{getStoreType(record.storeType)}</span>;
         },
@@ -36,17 +36,17 @@ class TableEnterLeave extends React.Component {
         title: '联系人',
         dataIndex: 'storeContact',
         key: 'storeContact',
-        width: '10%',
+        width: '7%',
       }, {
         title: '联系电话',
         dataIndex: 'storeContactTel',
         key: 'storeContactTel',
-        width: '10%',
+        width: '7%',
       }, {
         title: '手机',
         dataIndex: 'storeContactMobile',
         key: 'storeContactMobile',
-        width: '10%',
+        width: '7%',
       }, {
         title: '店铺创建时间',
         dataIndex: 'addTime',
@@ -60,21 +60,26 @@ class TableEnterLeave extends React.Component {
         key: 'tokenExpiresDate',
         width: '10%',
         sorter: true,
-        render: ((text, record) => <div>{record.tokenExpiresDate ? moment(record.tokenExpiresDate).format('YYYY-MM-DD') : null}</div>),
+        render: ((text, record) => <span>{record.tokenExpiresDate ? moment(record.tokenExpiresDate).format('YYYY-MM-DD') : null}</span>),
       }, {
         title: '店铺佣金（%）',
         dataIndex: 'commision',
         key: 'commision',
-        width: '10%',
+        width: '7%',
       }, {
         title: '操作',
         dataIndex: 'action',
         key: 'action',
-        width: 100,
         render: (text, record) => (
-          <a href="asd" onClick={e => this.onDelete(record.key, e)}>
-          Delete
-          </a>),
+          <div>
+            <a
+              href="javascript:void(0)"
+              onClick={() => this.props.fetchEdit(record.id)}
+            >
+          编辑
+          </a>
+          </div>
+          ),
       },
     ];
 
@@ -87,38 +92,40 @@ class TableEnterLeave extends React.Component {
   };
 
   render() {
-    return (<div>
-      <Row className="table-operation-bar">
-        <Col span={12}>
-          <Button
-            type="primary"
-            onClick={this.onAdd}
-          >新增</Button>
-          <Button
-            type="ghost"
-            className="button-second"
-            onClick={() => this.props.fetchList({})}
-          >
-            <Icon type="reload" />
-          </Button>
-        </Col>
-      </Row>
-      <Table
-        rowKey="id"
-        loading={this.props.listLoading}
-        columns={this.columns}
-        pagination={{ pageSize: 8 }}
-        dataSource={this.props.data}
-        onChange={this.pageChange}
-      />
-    </div>);
+    return (
+      <div>
+        <Row className="table-operation-bar">
+          <Col span={12}>
+            <Button
+              type="ghost"
+              onClick={() => this.props.fetchEdit(-1)}
+            >新增</Button>
+            <Button
+              type="ghost"
+              className="button-second"
+              onClick={() => this.props.fetchList({})}
+            >
+              <Icon type="reload" />
+            </Button>
+          </Col>
+        </Row>
+        <Table
+          rowKey="id"
+          loading={this.props.listLoading}
+          columns={this.columns}
+          pagination={{ pageSize: 8 }}
+          dataSource={this.props.data}
+          onChange={this.pageChange}
+        />
+      </div>);
   }
 }
 
-TableEnterLeave.propTypes = {
-  fetchList: React.PropTypes.func,
+List.propTypes = {
+  fetchList: React.PropTypes.func.isRequired,
   listLoading: React.PropTypes.bool,
   data: React.PropTypes.array,
+  fetchEdit: React.PropTypes.func.isRequired,
 };
 
-export default TableEnterLeave;
+export default List;

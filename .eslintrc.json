@@ -17,7 +17,8 @@
         "global-require": 0,
         "react/jsx-filename-extension": 0,
         "import/no-extraneous-dependencies": 0,
-        "no-restricted-syntax":0,
-        "react/forbid-prop-types":0
+        "no-restricted-syntax": 0,
+        "react/forbid-prop-types": 0,
+        "no-script-url": 0
     }
 }
