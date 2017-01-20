@@ -9,6 +9,7 @@ const Container = ({
   fetchList,
   fetchEdit,
   hide,
+  onFormChange,
   listState: { listLoading, data },
   editState: { visible, edit } }) =>
     <div>
@@ -22,6 +23,7 @@ const Container = ({
         visible={visible}
         edit={edit}
         hide={hide}
+        onFormChange={onFormChange}
       />
     </div>;
 
@@ -31,6 +33,7 @@ Container.propTypes = {
   fetchList: React.PropTypes.func,
   fetchEdit: React.PropTypes.func,
   hide: React.PropTypes.func,
+  onFormChange: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({

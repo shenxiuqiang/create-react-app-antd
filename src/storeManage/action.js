@@ -1,4 +1,4 @@
-import { actionList, actionListLoading, actionEdit, actionHide } from './reducer';
+import { actionList, actionListLoading, actionEdit, actionHide, actionFormChange } from './reducer';
 import { listApi, editApi } from '../service/storeManageService';
 
 
@@ -40,4 +40,8 @@ export const fetchEdit = id => (dispatch) => {
 
 export const hide = () => (dispatch) => {
   dispatch(actionHide());
+};
+
+export const onFormChange = data => (dispatch) => {
+  dispatch(actionFormChange(data));
 };

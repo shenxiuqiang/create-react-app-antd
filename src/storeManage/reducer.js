@@ -15,6 +15,8 @@ export const actionList = createAction(LIST);
 export const actionListLoading = createAction(LIST_LOADING);
 export const actionEdit = createAction(EDIT);
 export const actionHide = createAction(HIDE);
+export const actionFormChange = createAction(EDIT_CHANGE);
+
 
 const listInitialState = {
   listLoading: false,
@@ -84,6 +86,12 @@ export function editReducer(state = editInitialState, action) {
     case HIDE: {
       return { ...state,
         visible: false,
+      };
+    }
+    case EDIT_CHANGE: {
+      return {
+        ...state,
+        edit: Object.assign(state.edit, action.payload),
       };
     }
     default:
