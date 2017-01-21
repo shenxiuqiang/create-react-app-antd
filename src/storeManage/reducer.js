@@ -76,13 +76,12 @@ const editInitialState = {
 
 export function editReducer(state = editInitialState, action) {
   switch (action.type) {
-    case EDIT:
-      {
-        return { ...state,
-          visible: true,
-          edit: action.payload,
-        };
-      }
+    case EDIT: {
+      return { ...state,
+        visible: true,
+        edit: action.payload,
+      };
+    }
     case HIDE: {
       return { ...state,
         visible: false,

@@ -65,7 +65,7 @@ class List extends React.Component {
         title: '店铺佣金（%）',
         dataIndex: 'commision',
         key: 'commision',
-        width: '7%',
+        width: '10%',
       }, {
         title: '操作',
         dataIndex: 'action',
@@ -111,6 +111,7 @@ class List extends React.Component {
         </Row>
         <Table
           rowKey="id"
+          bordered
           loading={this.props.listLoading}
           columns={this.columns}
           pagination={{ pageSize: 8 }}
